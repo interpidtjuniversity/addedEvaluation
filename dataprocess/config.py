@@ -6,5 +6,5 @@ class Config:
 
 AppConfig = Config(
     url = "https://www.yuketang.cn/v2/web/index",
-    exam_name = "7.4前测"
+    exam_name = "7.2后测"
 )

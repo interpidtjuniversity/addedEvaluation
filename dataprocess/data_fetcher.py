@@ -92,7 +92,7 @@ class DataFetcher:
                     continue
                 # 这里打开了新窗口
                 student_detail_btn.click()
-                time.sleep(2)
+                time.sleep(2.5)
 
                 # 切换到新窗口句柄
                 for handle in self.driver.window_handles:

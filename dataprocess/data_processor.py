@@ -29,8 +29,9 @@ class DataProcessor:
                 student_data = self.process_student(student_info)
                 self.process_result[student_info['student_number']] = student_data
                 student_write_data = {
-                    'student_name': student_info['student_name'],
-                    'student_number': student_info['student_number'],
+                    # 去掉姓名和学号
+                    # 'student_name': student_info['student_name'],
+                    # 'student_number': student_info['student_number'],
                 }
                 for i in range(len(student_data[1])):
                     if student_data[1][i+1] is not None:
@@ -65,13 +66,10 @@ class DataProcessor:
         if not student_info['is_finish']:
             return {}, {}, None
         # 总时长 分钟 HH:SS
-        total_time = answer_time[str(len(answer_time) - 1)]
-        del answer_time[str(len(answer_time) - 1)]
+        total_time = answer_time[len(answer_time) - 1]
+        del answer_time[len(answer_time) - 1]
 
         for idx, idx_time in answer_time.items():
-            if idx == len(idx_time) - 1:
-                continue
-
             if idx_time['time'] is not None:
                 idx_time['time'] = datetime.datetime.strptime(idx_time['time'], '%Y-%m-%d %H:%M:%S').timestamp()
 
