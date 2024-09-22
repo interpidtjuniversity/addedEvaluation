@@ -92,7 +92,7 @@ class DataFetcher:
                     continue
                 # 这里打开了新窗口
                 student_detail_btn.click()
-                time.sleep(2.5)
+                time.sleep(self.config.per_student_wait_time)
 
                 # 切换到新窗口句柄
                 for handle in self.driver.window_handles:
@@ -120,7 +120,7 @@ class DataFetcher:
             if btn.get_attribute("disabled") == None:
                 btn.click()
                 # 主动等待有什么bug一直调试不好,由于时间紧急就先用sleep强制等待
-                time.sleep(1)
+                time.sleep(1.5)
             else:
                 break
         self.fetched_data[lesson_title] = students_grade

@@ -18,7 +18,8 @@ def hh_mm_ss_to_s(time_str: str):
 
 
 class DataProcessor:
-    def __init__(self, data):
+    def __init__(self, config, data):
+        self.config = config
         self.data = data
         self.process_result = {}
         self.write_result = []
@@ -28,11 +29,13 @@ class DataProcessor:
             for student_info in class_grades:
                 student_data = self.process_student(student_info)
                 self.process_result[student_info['student_number']] = student_data
-                student_write_data = {
-                    # 去掉姓名和学号
-                    # 'student_name': student_info['student_name'],
-                    # 'student_number': student_info['student_number'],
-                }
+                student_write_data = {}
+
+                # 添加姓名和学号
+                if not self.config.remove_student_name_and_number:
+                    student_write_data['student_name'] = student_info['student_name']
+                    student_write_data['student_number'] = student_info['student_number']
+
                 for i in range(len(student_data[1])):
                     if student_data[1][i+1] is not None:
                         student_write_data['feature'+str(i*3+1)] = int(student_data[1][i+1])
@@ -55,8 +58,11 @@ class DataProcessor:
                 # 总时长
                 student_write_data['feature47'] = hh_mm_ss_to_s(student_data[2])
                 # 初始化未作弊
-                student_write_data['feature48'] = 'N'
+                student_write_data['class'] = 'N'
 
+                # 开启了remove_none_line 并且 学生未答题
+                if self.config.remove_none_line and student_info['is_finish'] == False:
+                    continue
                 self.write_result.append(student_write_data)
 
 
