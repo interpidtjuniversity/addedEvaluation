@@ -15,7 +15,7 @@ def min_max(array):
 
 def need_normalization(col_title):
     # 姓名学号不用归一化
-    if col_title in ("student_name", "student_number"):
+    if col_title in ("student_name", "student_number", "class"):
         return False
     idx = int(col_title[7:])
     if idx ==46 or idx % 3 == 2:
