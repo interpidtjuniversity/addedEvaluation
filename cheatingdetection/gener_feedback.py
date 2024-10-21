@@ -51,5 +51,11 @@ def process_class(class_):
 for class_ in df.head(0).columns.values:
     process_class(class_)
 
-df = pd.DataFrame(df_data)  # 创建DataFrame
+df_data_keys = df_data.keys()
+sorted_df_data = {}
+df_data_keys = sorted(df_data_keys, key=lambda x: float(x[0:len(x) - 2]))
+for k in df_data_keys:
+    sorted_df_data[k] = df_data[k]
+
+df = pd.DataFrame(sorted_df_data)  # 创建DataFrame
 df.to_excel("最终名单.xlsx", index=False)
