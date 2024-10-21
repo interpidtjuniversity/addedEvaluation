@@ -12,7 +12,7 @@ class Config:
 
 AppConfig = Config(
     url = "https://www.yuketang.cn/v2/web/index",
-    exam_name = "7.4前测",
+    exam_name = "15.7前测",
     # 每次点开学生答题详情后需要等待的时间, 取决于网络情况和服务器状态, 找不到页面标签元素时可以稍微增加时长
     per_student_wait_time = 2.5
 )
