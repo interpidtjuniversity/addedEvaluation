@@ -4,8 +4,8 @@ import pymysql
 import pandas as pd
 
 # 修改这里
-time_str = "2024-10-21 23:59:59"
-TAG = "TAG"
+time_str = "2024-10-24 23:59:59"
+TAG = "20241024"
 
 conn = pymysql.connect(host="8.138.173.53", user="root", password="cy19991116", database="grade_feedback")
 cursor = conn.cursor()
@@ -17,11 +17,11 @@ for index, row in df.iterrows():
     name = row['姓名']
     id = row['学号']
     for exam in cols:
-        if '姓名'.__contains__(exam) is False and '学号'.__contains__(exam) is False:
+        if str(exam).strip().__contains__("姓名") is False and str(exam).strip().__contains__("学号") is False:
             result = row[exam]
-            if isinstance(result, str) and '作弊'.__contains__(result) is True and '未设置学号'.__contains__(id) is False:
+            if str(result).strip().__contains__("作弊") is True and str(id).strip().__contains__("未设置学号") is False:
                 values.append((id, exam, name, datetime.datetime.strptime(time_str, '%Y-%m-%d %H:%M:%S'), TAG))
-
+print(values)
 cursor.executemany(sql, values)
 conn.commit()
 conn.close()

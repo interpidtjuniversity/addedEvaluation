@@ -4,13 +4,15 @@ import pandas as pd
 
 # open given workbook
 # and store in excel object
-excel = openpyxl.load_workbook("15.7前测.xlsx")
+name = "15.7后测"
+
+excel = openpyxl.load_workbook(name + ".xlsx")
 
 # select the active sheet
 sheet = excel.active
 
 # writer object is created
-col = csv.writer(open("15.7前测.csv",
+col = csv.writer(open(name + ".csv",
                       'w',
                       newline=""))
 
