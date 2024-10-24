@@ -14,8 +14,8 @@ values = []
 df = pd.read_excel('检测结果.xlsx')
 cols = df.columns
 for index, row in df.iterrows():
-    name = row['姓名']
-    id = row['学号']
+    name = str(row['姓名']).strip()
+    id = str(row['学号']).strip()
     for exam in cols:
         if str(exam).strip().__contains__("姓名") is False and str(exam).strip().__contains__("学号") is False:
             result = row[exam]
